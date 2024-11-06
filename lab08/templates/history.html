@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NASA APOD - History</title>
+</head>
+<body>
+    <h1>NASA APOD History Viewer</h1>
+
+    <!-- Form to pick a date, with constraints on min and max dates -->
+    <form method="post">
+        <label for="date">Choose a date:</label>
+        <input type="date" id="date" name="date" min="1995-06-16" max="{{ max_date }}">
+        <button type="submit">View APOD</button>
+    </form>
+
+    <!-- Display the APOD image and details if the user has submitted a date -->
+    {% if apod %}
+    <hr>
+    <h2>APOD for {{ apod.date }}</h2>
+    <img src="{{ apod.url }}" alt="APOD">
+    <p>{{ apod.explanation }}</p>
+    <p>Copyright: {{ apod.copyright if apod.copyright else 'N/A' }}</p>
+    {% endif %}
+
+    <!-- Link to go back to the home page -->
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>
